@@ -1,0 +1,12 @@
+h1= title 
+p This become to #{title} in windows azure
+
+script(src='/socket.io/socket.io.js')
+script
+	
+	var s = io.connect();
+
+	s.on('helo', function (msg) {
+		// body...
+		alert(msg);
+	});
