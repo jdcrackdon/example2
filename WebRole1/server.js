@@ -7,22 +7,27 @@ var express = require('express')
   , routes = require('./routes')
   , sio = require('socket.io')
   , azure = require('azure')
-  , data = require('./datajs.min.js')
+  , $data = require('jaydata')
   , facebook = require('faceplate');
-
-data.OData.read( 
-  "http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/", 
-  function (data) { 
-    
-  } 
-);
 
 var serviceBusService = azure.createServiceBusService();
 
 var app = module.exports = express.createServer();
 
-// Configuration
+// data classes
+$data.Class.define("$clicktoaction.Types.FacebookUsers",$data.Entity, null, {
+    Id: { dataType: "guid", key: true},
+    Identification: { dataType: "string"},
+    Token: { dataType: "string"},
+    FacebookId: { dataType: "string"},
+    Identification: { dataType: "string"},
+    Permissions: { dataType: "string" },
+    Email: { dataType: "string" }
+}, null);
 
+
+
+// Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -74,10 +79,12 @@ io.sockets.on('connection', function(socket){
     if (res) {
         socket.emit('helo', 'Say hello to my little friend');
         createTopic();
+        //$clicktoaction.context = new $clicktoaction.Types.FacebookUsersContext({ name:"oData", oDataServiceHost:"http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc" });
     };
   });
 
 });
+
 
 //Create tipc
 function createTopic () {
@@ -92,7 +99,7 @@ function createTopic () {
 function createSubscriptions () {
   serviceBusService.createSubscription(topic, subscription, function(error){
      if(!error){ 
-        sendMessage();      
+        sendMessage();    
       }
   });
 }

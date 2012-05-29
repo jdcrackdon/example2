@@ -7,8 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , sio = require('socket.io')
   , azure = require('azure')
-  , $data = require('jaydata');
-
+  , $data = require('jaydata')
+  , facebook = require('faceplate');
 
 var serviceBusService = azure.createServiceBusService();
 
@@ -72,6 +72,7 @@ io.sockets.on('connection', function(socket){
 
 });
 
+
 //Create tipc
 function createTopic () {
   serviceBusService.createTopicIfNotExists(topic, topicOptions, function(error){
@@ -85,7 +86,7 @@ function createTopic () {
 function createSubscriptions () {
   serviceBusService.createSubscription(topic, subscription, function(error){
      if(!error){ 
-        sendMessage();      
+        sendMessage();    
       }
   });
 }

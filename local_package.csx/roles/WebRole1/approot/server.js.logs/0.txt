@@ -1,15 +1,58 @@
-
-node.js:201
-        throw e; // process.nextTick error, or 'error' event on first tick
-              ^
-Error: Cannot find module 'location'
-    at Function._resolveFilename (module.js:332:11)
-    at Function._load (module.js:279:25)
-    at Module.require (module.js:354:17)
-    at require (module.js:370:17)
-    at create (C:\azure_node_example\example2\WebRole1\node_modules\jaydata\node_modules\jquery\node-jquery.js:6:33)
-    at C:\azure_node_example\example2\WebRole1\node_modules\jaydata\node_modules\jquery\node-jquery.js:9065:18
-    at Object.<anonymous> (C:\azure_node_example\example2\WebRole1\node_modules\jaydata\node_modules\jquery\node-jquery.js:9067:1)
-    at Module._compile (module.js:441:26)
-    at Object..js (module.js:459:10)
-    at Module.load (module.js:348:31)
+info: socket.io started
+debug: discarding transport
+debug: xhr-polling received data packet 1::
+debug
+debug: setting request GET /socket.io/1/xhr-polling/534748460488369734?t=1338307029372
+debug: setting poll timeout
+debug: clearing poll timeout
+debug: xhr-polling writing 7:::1+0
+debug: set close timeout for client 534748460488369734
+warn: client not handshaken client should reconnect
+info: transport end (error)
+debug: cleared close timeout for client 534748460488369734
+debug: discarding transport
+debug: discarding transport
+debug: xhr-polling received data packet 0::
+debug: got disconnection packet
+debug: client authorized
+info: handshake authorized 1076340358333278608
+debug: client authorized
+info: handshake authorized 1357237091160166621
+debug: client authorized
+info: handshake authorized 11381658241639690528
+debug: client authorized
+info: handshake authorized 1588493835667608933
+debug: client authorized
+info: handshake authorized 2065049697853214168
+debug: served static content /socket.io.js
+debug: client authorized
+info: handshake authorized 12596845721244085321
+debug: client authorized
+info: handshake authorized 4534612000785823
+debug: setting request GET /socket.io/1/xhr-polling/12596845721244085321?t=1338307061760
+debug: setting poll timeout
+debug: client authorized for 
+debug: clearing poll timeout
+debug: xhr-polling writing 1::
+debug: set close timeout for client 12596845721244085321
+debug: xhr-polling received data packet 5:::{"name":"ready","args":[true]}
+debug: setting request GET /socket.io/1/xhr-polling/12596845721244085321?t=1338307061792
+debug: setting poll timeout
+debug: clearing poll timeout
+debug: xhr-polling writing 5:::{"name":"helo","args":["Say hello to my little friend"]}
+debug: set close timeout for client 12596845721244085321
+debug: discarding transport
+debug: cleared close timeout for client 12596845721244085321
+debug: client authorized
+info: handshake authorized 527253101726135636
+debug: fired close timeout for client 12596845721244085321
+info: transport end (close timeout)
+debug: discarding transport
+debug: client authorized
+info: handshake authorized 6159325451600902665
+debug: client authorized
+info: handshake authorized 1549552165100119839
+debug: client authorized
+info: handshake authorized 1810964941008663799
+debug: client authorized
+info: handshake authorized 9895660581729797037
