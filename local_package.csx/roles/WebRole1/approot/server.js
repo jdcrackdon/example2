@@ -14,8 +14,20 @@ var serviceBusService = azure.createServiceBusService();
 
 var app = module.exports = express.createServer();
 
-// Configuration
+// data classes
+$data.Class.define("$clicktoaction.Types.FacebookUsers",$data.Entity, null, {
+    Id: { dataType: "guid", key: true},
+    Identification: { dataType: "string"},
+    Token: { dataType: "string"},
+    FacebookId: { dataType: "string"},
+    Identification: { dataType: "string"},
+    Permissions: { dataType: "string" },
+    Email: { dataType: "string" }
+}, null);
 
+
+
+// Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -67,13 +79,19 @@ io.sockets.on('connection', function(socket){
     if (res) {
         socket.emit('helo', 'Say hello to my little friend');
         createTopic();
+        //$clicktoaction.context = new $clicktoaction.Types.FacebookUsersContext({ name:"oData", oDataServiceHost:"http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc" });
     };
   });
 
 });
 
+// Data init
+function dataService () {
+  $clicktoaction.context = new $clicktoaction.Types.FacebookUsersContext({ name:"oData", oDataServiceHost:"http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc" });
+}
 
-//Create tipc
+
+//Create topic
 function createTopic () {
   serviceBusService.createTopicIfNotExists(topic, topicOptions, function(error){
      if(!error){

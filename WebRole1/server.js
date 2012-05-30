@@ -12,7 +12,14 @@ var express = require('express')
 
 var serviceBusService = azure.createServiceBusService();
 
-var app = module.exports = express.createServer();
+//Create server
+var app = module.exports = express.createServer(
+  express.bodyParser(),
+  express.cookieParser(),
+  require('faceplate').middleware({
+    app_id: '419704494719974',
+    secret: '72969658f939749acf860ae8df65da65'
+  }));
 
 // data classes
 $data.Class.define("$clicktoaction.Types.FacebookUsers",$data.Entity, null, {
@@ -85,8 +92,13 @@ io.sockets.on('connection', function(socket){
 
 });
 
+// Data init
+function dataService () {
+  $clicktoaction.context = new $clicktoaction.Types.FacebookUsersContext({ name:"oData", oDataServiceHost:"http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc" });
+}
 
-//Create tipc
+
+//Create topic
 function createTopic () {
   serviceBusService.createTopicIfNotExists(topic, topicOptions, function(error){
      if(!error){
