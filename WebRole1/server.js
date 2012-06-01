@@ -7,8 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , sio = require('socket.io')
   , azure = require('azure')
-  , $data = require('jaydata')
   , facebook = require('faceplate');
+
 
 var serviceBusService = azure.createServiceBusService();
 
@@ -20,19 +20,6 @@ var app = module.exports = express.createServer(
     app_id: '419704494719974',
     secret: '72969658f939749acf860ae8df65da65'
   }));
-
-// data classes
-$data.Class.define("$clicktoaction.Types.FacebookUsers",$data.Entity, null, {
-    Id: { dataType: "guid", key: true},
-    Identification: { dataType: "string"},
-    Token: { dataType: "string"},
-    FacebookId: { dataType: "string"},
-    Identification: { dataType: "string"},
-    Permissions: { dataType: "string" },
-    Email: { dataType: "string" }
-}, null);
-
-
 
 // Configuration
 app.configure(function(){
@@ -60,11 +47,11 @@ app.listen(process.env.port);
 // Service bus instance config
 var topicOptions = {
         MaxSizeInMegabytes: '5120',
-        DefaultMessageTimeToLive: 'PT1M'
+        DefaultMessageTimeToLive: 'PT3M'
 };
 
-var topic = "TopicTest"
-  , subscription = "subscription1";
+var topic = "ttopic"
+  , subscription = "subsc1";
 
 //message body
 var message = {
@@ -85,62 +72,55 @@ io.sockets.on('connection', function(socket){
   socket.on('ready', function(res) { 
     if (res) {
         socket.emit('helo', 'Say hello to my little friend');
-        createTopic();
-        //$clicktoaction.context = new $clicktoaction.Types.FacebookUsersContext({ name:"oData", oDataServiceHost:"http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc" });
+        message_send();
     };
+  });
+
+  serviceBusService.receiveSubscriptionMessage(topic, subscription, function(error, receivedMessage){
+      if(!error){
+          socket.emit('helo', receivedMessage.body);
+          receiveSubscriptionMessage();
+      }else{
+        console.log(error);
+      }
   });
 
 });
 
-// Data init
-function dataService () {
-  $clicktoaction.context = new $clicktoaction.Types.FacebookUsersContext({ name:"oData", oDataServiceHost:"http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc" });
-}
 
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 20); 
+});
 
-//Create topic
-function createTopic () {
-  serviceBusService.createTopicIfNotExists(topic, topicOptions, function(error){
-     if(!error){
-        createSubscriptions();
-     }     
-  });
-}
-
-
-function createSubscriptions () {
-  serviceBusService.createSubscription(topic, subscription, function(error){
-     if(!error){ 
-        sendMessage();    
+function message_send() {
+  for (i = 0;i < 5;i++) {
+    message.customProperties.messagenumber=i;
+    message.body='This is Message #'+i;
+    serviceBusService.sendTopicMessage(topic, message, function(error) {
+      if (error) {
+        console.log(error);
       }
-  });
+    });
+  }
 }
+
 
 function receiveSubscriptionMessage () {
   serviceBusService.receiveSubscriptionMessage(topic, subscription, function(error, receivedMessage){
       if(!error){
-          socket.emit('helo', 'done');
-      }
-  });  
-}
-
-
-//Data message function
-function sendMessage(){
-  serviceBusService.sendTopicMessage(topic, 'Is a live', function(error) {
-      if(!error){   
-        socket.emit('helo', 'done');
-        
-        serviceBusService.sendTopicMessage(topic, 'Again more strong, Is a live', function(error) {
-            if(!error){     
-              receiveSubscriptionMessage();
-            }
-        });
+          socket.emit('helo', receivedMessage.body);
+      }else{
+        console.log(error);
       }
   });
-};
+}
+
 
 
 // Routes
 app.get('/', routes.index);
-app.get('/home', function(req, res){ res.render('home', { title: 'Home' }); });
+
+app.get('/home', function(req, res){ 
+  res.render('home', { title: 'Home' }); 
+});

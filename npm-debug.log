@@ -1,27 +1,39 @@
 info it worked if it ends with ok
 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-verbose cli   'install' ]
+verbose cli   'install',
+verbose cli   'jquery' ]
 info using npm@1.1.21
 info using node@v0.6.17
 verbose C:\Program Files (x86)\nodejs\\node.exe node symlink
 verbose config file C:\Users\jose\.npmrc
 verbose config file C:\Program Files (x86)\nodejs\etc\npmrc
 verbose config file C:\Program Files (x86)\nodejs\node_modules\npm\npmrc
-ERR! Couldn't read dependencies.
-ERR! Error: ENOENT, open 'C:\azure_node_example\example2\package.json'
+verbose cache add [ 'jquery', null ]
+silly cache add: name, spec, args [ undefined, 'jquery', [ 'jquery', null ] ]
+verbose parsed url { pathname: 'jquery', path: 'jquery', href: 'jquery' }
+verbose addNamed [ 'jquery', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'jquery', '', false ]
+verbose raw, before any munging jquery
+verbose url resolving [ 'https://registry.npmjs.org/', './jquery' ]
+verbose url resolved https://registry.npmjs.org/jquery
+http GET https://registry.npmjs.org/jquery
+ERR! Error: getaddrinfo ENOENT
+ERR!     at errnoException (dns.js:31:11)
+ERR!     at Object.onanswer [as oncomplete] (dns.js:140:16)
 ERR! You may report this log at:
 ERR!     <http://github.com/isaacs/npm/issues>
 ERR! or email it to:
 ERR!     <npm-@googlegroups.com>
 ERR! 
 ERR! System Windows_NT 6.1.7601
-ERR! command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+ERR! command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "jquery"
 ERR! cwd C:\azure_node_example\example2
 ERR! node -v v0.6.17
 ERR! npm -v 1.1.21
-ERR! path C:\azure_node_example\example2\package.json
-ERR! code ENOENT
-ERR! message ENOENT, open 'C:\azure_node_example\example2\package.json'
+ERR! syscall getaddrinfo
+ERR! code ENOTFOUND
+ERR! message getaddrinfo ENOENT
 ERR! errno {}
 verbose exit [ 1, true ]
