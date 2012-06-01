@@ -95,3 +95,19 @@ debug: setting request GET /socket.io/1/xhr-polling/6701787891321776597?t=133856
 debug: setting poll timeout
 debug: discarding transport
 debug: cleared close timeout for client 6701787891321776597
+debug: clearing poll timeout
+debug: xhr-polling writing 8::
+debug: set close timeout for client 6701787891321776597
+debug: xhr-polling closed due to exceeded duration
+debug: setting request GET /socket.io/1/xhr-polling/6701787891321776597?t=1338567230436
+debug: setting poll timeout
+debug: discarding transport
+debug: cleared close timeout for client 6701787891321776597
+debug: clearing poll timeout
+debug: xhr-polling writing 8::
+debug: set close timeout for client 6701787891321776597
+debug: xhr-polling closed due to exceeded duration
+debug: setting request GET /socket.io/1/xhr-polling/6701787891321776597?t=1338567250504
+debug: setting poll timeout
+debug: discarding transport
+debug: cleared close timeout for client 6701787891321776597
