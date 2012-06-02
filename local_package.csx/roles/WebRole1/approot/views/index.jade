@@ -8,12 +8,22 @@ script
 	var s = io.connect();
 
 	s.on('helo', function (msg) {
-		alert(msg);
+		$('#container').append('<p>'+msg+'</p>');
 	});
 
 	$(document).ready(function() {
 		s.emit('ready', true);
 	});
+
+	/*setInterval(function()
+		{
+			s.emit('ready', true);
+	}, 30000);*/
+
+
+
+#container
+	p test with div's
 
      
 

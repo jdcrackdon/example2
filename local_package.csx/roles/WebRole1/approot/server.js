@@ -7,21 +7,16 @@ var express = require('express')
   , routes = require('./routes')
   , sio = require('socket.io')
   , azure = require('azure')
-  , $data = require('jaydata')
+  , events = require('events')
+  , serverEmitter = new events.EventEmitter()
+  , request = require('request')
   , facebook = require('faceplate');
 
-  require('./clicktoaction.js');
 
 var serviceBusService = azure.createServiceBusService();
 
 //Create server
-var app = module.exports = express.createServer(
-  express.bodyParser(),
-  express.cookieParser(),
-  require('faceplate').middleware({
-    app_id: '419704494719974',
-    secret: '72969658f939749acf860ae8df65da65'
-  }));
+var app = module.exports = express.createServer();
 
 // Configuration
 app.configure(function(){
@@ -52,7 +47,7 @@ var topicOptions = {
         DefaultMessageTimeToLive: 'PT3M'
 };
 
-var topic = "ttopic"
+var topic = "test_topic"
   , subscription = "subsc1";
 
 //message body
@@ -69,45 +64,52 @@ var message = {
  */
 var io = sio.listen(app);
 
-io.sockets.on('connection', function(socket){
-
-  socket.on('ready', function(res) { 
-    if (res) {
-        socket.emit('helo', 'Say hello to my little friend');
-
-    };
-  });
-
-  serviceBusService.sendQueueMessage('queue', 'Send Message Still Works', function(error) {
-      if (!error) {
-      }
-  });
-
-  serviceBusService.receiveQueueMessage('queue', function(error, receivedMessage) {
-      if(!error){
-          socket.emit('helo', receivedMessage.body);
-          receiveSubscriptionMessage();
-      };
-  }); 
-
-  socket.emit('helo', clicktoaction.context.FacebookUsers);
-
-});
-
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 20); 
+  io.set("polling duration", 20);  
 });
 
 
 function receiveSubscriptionMessage () {
-  serviceBusService.receiveQueueMessage('queue', function(error, receivedMessage) {
+  serviceBusService.receiveSubscriptionMessage(topic, subscription, function(error, receivedMessage){
       if(!error){
-          socket.emit('helo', receivedMessage.body);
-      };
-  }); 
+          console.log('received')
+          io.sockets.emit('helo', receivedMessage.body);
+          receiveSubscriptionMessage();
+      }
+  });
 }
 
+io.sockets.on('connection', function(socket){
+
+  receiveSubscriptionMessage();
+
+  socket.once('connection', function (client) {    
+
+  });
+
+  socket.on('ready', function(res) { 
+    if (res) {
+        socket.emit('helo', 'Say hello to my little friend');
+    };
+  });
+
+  //requestUserData();
+});
+
+
+//get some data
+function requestUserData () {
+  request({uri: 'https://cold-river-3054.herokuapp.com/dataFacebookUser.json'}, function(err,response,body) {
+        if(!err){
+            var cleanData = JSON.parse(body);
+            console.log(cleanData);
+            return cleanData;
+        }
+        
+    }
+  ); 
+}
 
 
 // Routes
@@ -115,8 +117,4 @@ app.get('/', routes.index);
 
 app.get('/home', function(req, res){ 
   res.render('home', { title: 'Home' }); 
-});
-
-app.get('/test2', function(req, res){ 
-  res.render('test2', { title: 'test2' }); 
 });

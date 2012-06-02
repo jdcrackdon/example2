@@ -7,19 +7,22 @@ var express = require('express')
   , routes = require('./routes')
   , sio = require('socket.io')
   , azure = require('azure')
+  , nowjs = require("now")
+  , request = require('request')
   , facebook = require('faceplate');
 
 
 var serviceBusService = azure.createServiceBusService();
 
 //Create server
-var app = module.exports = express.createServer(
-  express.bodyParser(),
+var app = module.exports = express.createServer(express.bodyParser(),
   express.cookieParser(),
   require('faceplate').middleware({
-    app_id: '419704494719974',
-    secret: '72969658f939749acf860ae8df65da65'
+    app_id: process.env.FACEBOOK_APP_ID,
+    secret: process.env.FACEBOOK_SECRET
   }));
+
+var everyone = nowjs.initialize(app, {socketio: {transports: ['xhr-polling', 'jsonp-polling']}});
 
 // Configuration
 app.configure(function(){
@@ -50,7 +53,7 @@ var topicOptions = {
         DefaultMessageTimeToLive: 'PT3M'
 };
 
-var topic = "ttopic"
+var topic = "test_topic"
   , subscription = "subsc1";
 
 //message body
@@ -65,57 +68,37 @@ var message = {
 /*
  *Socket.IO server (single process only)
  */
-var io = sio.listen(app);
 
-io.sockets.on('connection', function(socket){
-
-  socket.on('ready', function(res) { 
-    if (res) {
-        socket.emit('helo', 'Say hello to my little friend');
-        message_send();
-    };
-  });
-
-  serviceBusService.receiveSubscriptionMessage(topic, subscription, function(error, receivedMessage){
-      if(!error){
-          socket.emit('helo', receivedMessage.body);
-          receiveSubscriptionMessage();
-      }else{
-        console.log(error);
-      }
-  });
-
-});
-
-
-io.configure(function () { 
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 20); 
-});
-
-function message_send() {
-  for (i = 0;i < 5;i++) {
-    message.customProperties.messagenumber=i;
-    message.body='This is Message #'+i;
-    serviceBusService.sendTopicMessage(topic, message, function(error) {
-      if (error) {
-        console.log(error);
-      }
-    });
-  }
-}
-
+everyone.now.distributeMessage = function (message) {
+    //receiveSubscriptionMessage();
+    everyone.now.receiveMessage(this.now.name, message);
+};
 
 function receiveSubscriptionMessage () {
   serviceBusService.receiveSubscriptionMessage(topic, subscription, function(error, receivedMessage){
       if(!error){
-          socket.emit('helo', receivedMessage.body);
-      }else{
-        console.log(error);
+          console.log('received')
+          //io.sockets.emit('helo', receivedMessage.body);
+          everyone.now.receiveMessage("subsc1", receivedMessage.body);
       }
+
   });
 }
 
+setInterval(function(){receiveSubscriptionMessage();}, 1000);
+
+//get some data
+function requestUserData () {
+  request({uri: 'https://cold-river-3054.herokuapp.com/dataFacebookUser.json'}, function(err,response,body) {
+        if(!err){
+            var cleanData = JSON.parse(body);
+            console.log(cleanData);
+            return cleanData;
+        }
+        
+    }
+  ); 
+}
 
 
 // Routes
