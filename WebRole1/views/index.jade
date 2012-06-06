@@ -1,9 +1,6 @@
-h1= title
-p Welcome to #{title} in windows azure
-
-script(src='/socket.io/socket.io.js')
 script(src='/nowjs/now.js')
 script(src='http://code.jquery.com/jquery-1.7.2.min.js')
+script(src='/javascripts/script.js')
 script
 	
 	/*var s = io.connect();
@@ -13,11 +10,23 @@ script
 	});*/
 
 	$(document).ready(function() {
-		//s.emit('ready', true);
-		now.receiveMessage = function(name, message){
-			$('#container').append('<p>'+message+'</p>');          
-		}
+		//s.emit('ready', true);		
 	});
+
+	now.ready(function() {
+		now.receiveMessage = function(name, message){
+			$('#container').append('<p>'+message+'</p>'); 
+			alert(message);         
+		}
+
+		now.fbObject='init';
+		now.checkValue();
+	});
+
+	now.receiveMessage = function(name, message){
+		$('#container').append('<p>'+message+'</p>'); 
+		alert(message);         
+	}
 
 	
 	/*setInterval(function()
@@ -25,10 +34,46 @@ script
 			s.emit('ready', true);
 	}, 30000);*/
 
+div#pagina.disable
+	
+	div#bloques
+
+		div#home.bloque
+			img(src="http://html5lounge.com/imagenes/home.png", alt="circle")
+
+			div#col
+				canvas(width="440",height="440")
+				h1 hola
+
+			div#col
+				p 
+				p 
+				p
 
 
-#container
-	p test with div's
+		div.bloque(data-url="destroyafteruse.com",
+			fbObject='objeto1',
+			data-info="Features: video adapted to several devices, semantic tags, flexible layouts, standards complaint. <a target='_blank' href='http://www.awwwards.com/best-websites/agent-strategic-intelligence-embassy'>Awwwards Mention, Sept 2010</a>")
+			img(src="http://html5lounge.com/imagenes/destroyafteruse.jpg", alt="Destroy After Use", width="1024", height="690")
+		div.bloque(data-url="sistemaunoipad.com",
+			fbObject='objeto2',
+			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
+			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
+		div.bloque(data-url="sistemaunoipad.com",
+			fbObject='objeto3',
+			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
+			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
+		div.bloque(data-url="sistemaunoipad.com",
+			fbObject='objeto4',
+			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
+			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
+		div.bloque(data-url="sistemaunoipad.com",
+			fbObject='objeto5',
+			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
+			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
 
-     
+
+	div#barrita
+		div#info
+		div#controles   
 

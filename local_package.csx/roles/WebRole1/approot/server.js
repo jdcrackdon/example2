@@ -5,18 +5,29 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , sio = require('socket.io')
   , azure = require('azure')
-  , events = require('events')
-  , serverEmitter = new events.EventEmitter()
-  , request = require('request')
-  , facebook = require('faceplate');
+  , nowjs = require("now")
+  , OData = require('./datajs-1.0.3.js').OData
+  , FB = require('fb')
+  , moment = require('moment')
+  , request = require('request');
 
-
+//Create the service Bus
 var serviceBusService = azure.createServiceBusService();
 
 //Create server
 var app = module.exports = express.createServer();
+
+//Init the facebook connect
+
+//Facebook
+
+
+//End
+
+
+//Newjs sockets
+var everyone = nowjs.initialize(app, {socketio: {transports: ['xhr-polling', 'jsonp-polling']}});
 
 // Configuration
 app.configure(function(){
@@ -62,53 +73,76 @@ var message = {
 /*
  *Socket.IO server (single process only)
  */
-var io = sio.listen(app);
 
-io.configure(function () { 
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 20);  
-});
+everyone.now.distributeMessage = function (message) {
+    //receiveSubscriptionMessage();
+    everyone.now.receiveMessage(this.now.name, message);
+};
 
+everyone.now.sendReady = function (msg) {
+    everyone.now.receiveMessage("subsc1", msg);
+};
 
 function receiveSubscriptionMessage () {
+
   serviceBusService.receiveSubscriptionMessage(topic, subscription, function(error, receivedMessage){
       if(!error){
-          console.log('received')
-          io.sockets.emit('helo', receivedMessage.body);
-          receiveSubscriptionMessage();
+          var v = receivedMessage.customProperties.uid;
+          var d = new Date().toLocaleString();
+          var fullDate = moment(d);
+          var jsonDate = '/Date('+moment().valueOf()+')/';
+          //requestUserData("FacebookUsers?$filter=Uid%20eq%20'"+v+"'");
+          var urlFilterUsers = "FacebookUsers?$filter=Uid eq '"+v+"'";
+          var urlFilterObjects = "FacebookObjects?$filter=StartDate le datetime'"+fullDate.format()+"' and FinishDate ge datetime'"+fullDate.format()+"'";
+          //requestUserData(urlFilterObjects);
+          console.log(urlFilterObjects);
+          //everyone.now.receiveMessage("subsc1", $data.results[0].Token);
+          //makeLikes($data.results[0].Token);
+          everyone.now.receiveMessage("subsc1", 'asasasasas');
       }
   });
 }
 
-io.sockets.on('connection', function(socket){
-
-  receiveSubscriptionMessage();
-
-  socket.once('connection', function (client) {    
-
-  });
-
-  socket.on('ready', function(res) { 
-    if (res) {
-        socket.emit('helo', 'Say hello to my little friend');
-    };
-  });
-
-  //requestUserData();
-});
-
+setInterval(function(){receiveSubscriptionMessage();}, 1000);
 
 //get some data
-function requestUserData () {
-  request({uri: 'https://cold-river-3054.herokuapp.com/dataFacebookUser.json'}, function(err,response,body) {
-        if(!err){
-            var cleanData = JSON.parse(body);
-            console.log(cleanData);
-            return cleanData;
-        }
-        
+function requestUserData (filter) {
+  OData.atomHandler.read = (function () {
+      var atomReadFunction = OData.atomHandler.read;
+      return function (response, context) {
+          if (response.headers["Content-Type"]) {
+              return atomReadFunction.call(OData.atomHandler, response, context);
+          }
+      }
+  })();
+  OData.read({ requestUri: "http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/"+filter, 
+    user: "clicktoactionuser", 
+    password: "IDlink.co1" }, function (data,response) {
+      /*if (type == 'date'){
+
+
+      }*/  
+      var fullDate = moment(moment(data.results[0].FinishDate).valueOf());
+      fullDate.add('days',1);
+      var jsonDate = '/Date('+moment().valueOf()+')/';
+      //fullDate.subtract('hours', 7); //gmt -0500
+      everyone.now.receiveMessage("subsc1", data.results[0].FinishDate);
+      //console.log(data.results[0]);
+  }, function (err) {
+      console.log("error "+err);
+  }, OData.jsonHandler);
+}
+
+function makeLikes (access_token) {
+  // body...10150934692631941
+  FB.setAccessToken(access_token);
+  FB.api('10150934692631941/likes', 'post', function (res) {
+    if(!res || res.error) {
+      console.log(res.error);
+      return;
     }
-  ); 
+    console.log('Post Id: ' + res.id);
+  });
 }
 
 

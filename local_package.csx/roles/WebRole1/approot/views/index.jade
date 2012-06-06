@@ -2,28 +2,37 @@ h1= title
 p Welcome to #{title} in windows azure
 
 script(src='/socket.io/socket.io.js')
+script(src='/nowjs/now.js')
 script(src='http://code.jquery.com/jquery-1.7.2.min.js')
 script
 	
-	var s = io.connect();
+	/*var s = io.connect();
 
 	s.on('helo', function (msg) {
 		$('#container').append('<p>'+msg+'</p>');
-	});
+	});*/
 
 	$(document).ready(function() {
-		s.emit('ready', true);
+		//s.emit('ready', true);
+		now.sendReady('hola desde index');
+		
 	});
 
+	now.receiveMessage = function(name, message){
+		$('#container').append('<p>'+message+'</p>');          
+	}
+
+	
 	/*setInterval(function()
 		{
 			s.emit('ready', true);
 	}, 30000);*/
 
-
-
 #container
-	p test with div's
+	p test with div
+
+.bloque
+	p un bloque
 
      
 
