@@ -1,79 +1,307 @@
-script(src='/nowjs/now.js')
-script(src='http://code.jquery.com/jquery-1.7.2.min.js')
-script(src='/javascripts/script.js')
+div#fb_root
 script
-	
-	/*var s = io.connect();
-
-	s.on('helo', function (msg) {
-		$('#container').append('<p>'+msg+'</p>');
-	});*/
-
+	var userData, postData; 
 	$(document).ready(function() {
-		//s.emit('ready', true);		
+		$("#vc1").verticalCarousel({nSlots: 5});		
+		$(".chzn-select").chosen();
+		$("#dedote").hide();
+		//buildStream();
+
+		/*if (window.webkitNotifications) {
+			if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
+				// function defined in step 2
+				window.webkitNotifications.createNotification('holalalalalal');
+			} else {
+				window.webkitNotifications.requestPermission();
+			}
+		}else {
+			console.log("Notifications are not supported for this Browser/OS version yet.");
+		}*/
 	});
 
 	now.ready(function() {
 		now.receiveMessage = function(name, message){
-			$('#container').append('<p>'+message+'</p>'); 
-			alert(message);         
-		}
+			//window.webkitNotifications.requestPermission();
+			if (message){
+				if(message=='like'){
+					//window.webkitNotifications.createNotification('Maloooo');
+					alert('error like');
+				}else if(message=='status'){
+					//window.webkitNotifications.createNotification('Maaaaaaaaaaalooooooooooo');
+					alert('error status');
+				}else{
+					//$("#dedote").fadeIn("slow");
+					addStream(message);
+					//setTimeout("hideLike()",5000);
+				}
+			}
+		};
 
-		now.fbObject='init';
-		now.checkValue();
+		now.likeShow = function(msg) {
+			if(msg){
+				$("#dedote").fadeIn("slow");
+				setTimeout("hideLike()",5000);
+			}
+		};
+
+		now.streamFeed = function(arg) {
+			if(arg){
+				arg.forEach(function(data) {
+					var divContent = "<div class='comentario'>"+
+						"<img src='"+data.pic_small+"' alt='Imagen Perfil'>"+
+						"<div class='comentario_2'>"+
+						"<h4><b>"+data.name+"</b></h4>"+
+						"<p>"+data.message+"</p></div></div>";
+					$("#comentarios").append(divContent);
+				});		
+			}
+		};
 	});
 
-	now.receiveMessage = function(name, message){
-		$('#container').append('<p>'+message+'</p>'); 
-		alert(message);         
+	function hideLike() {
+		$("#dedote").fadeOut("slow");
+		//$("#dedote").hide();
+	};
+
+	function addStream(data) {
+		var divContent = "<div class='comentario'>"+
+			"<img src='"+data[1].fql_result_set[0].pic_small+"' alt='Imagen Perfil'>"+
+			"<div class='comentario_2'>"+
+			"<h4><b>"+data[1].fql_result_set[0].name+"</b></h4>"+
+			"<p>"+data[0].fql_result_set[0].message+"</p></div></div>";
+		$("#comentarios").prepend(divContent);
 	}
 
-	
-	/*setInterval(function()
-		{
-			s.emit('ready', true);
-	}, 30000);*/
+	function buildStream() {
+		
+	}
 
-div#pagina.disable
-	
-	div#bloques
 
-		div#home.bloque
-			img(src="http://html5lounge.com/imagenes/home.png", alt="circle")
+div#content
+	div#speakers
+		div#vc1.vertical-carousel
+			a.scru Arriba
+			div.vertical-carousel-container
+				ul.vertical-carousel-list
+					li(data_index='1')
+						p Daniel Arbeláez
+					li(data_index='2')
+						p Gareth Hornberger
+					li(data_index='3')
+						p Juan Carlos Rentería
+					li(data_index='4')
+						p Juan Camilo Suárez
+					li(data_index='5')
+						p Jorge Villegas
+					li(data_index='6')
+						p Christopher Hermes
+					li(data_index='7')
+						p Adriana Plata
+					li(data_index='8')
+						p Mariano Otero
+					li(data_index='9')
+						p Juan Luis Isaza
+					li(data_index='10')
+						p Catherine Villota
+					li(data_index='11')
+						p Susan Sardiñas
+					li(data_index='12')
+						p Sofía Calvo
+					li(data_index='13')
+						p Tuyo Isaza
+					li(data_index='14')
+						p Sergio Quijano
+			a.scrd Abajo
 
-			div#col
-				canvas(width="440",height="440")
-				h1 hola
-
-			div#col
+	div#main
+		h2#titulo loololokoasfhsdifhisdhf  
+		hr
+		p#des skhdfsdhfihsdiufhisdhfiushdih
+		div#main_content
+			div#contenido
+				div#pagina.disable
+					
+					div#bloques
+						div.bloque(data-url="destroyafteruse.com",
+							fbObject='10151328404122787',
+							data-info="",
+							data-title="Daniel Arbeláez")
+							div#main_content2
+								img(src='/images/daniel-arbelaez.png')
+								div#contenido2
+									h3 Daniel Arbeláez
+									p Consultor internacional en optimización de TI para alcanzar objetivos de negocio con màs de 8 años de experiencia,ingeniero de sistemas, especialista en sistemas de información.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328405997787',
+							data-title="Gareth Hornberger")
+							div#main_content2
+								img(src='/images/garethhornberger.jpg')
+								div#contenido2
+									h3 Gareth Hornberger
+									p Graduado de la Universidad de Southern California, actualmente es  Senior Global Digital Marketing Manager en LEVI STRAUSS & CO Inició su carrera como estratega digital en Razorfish y en el 2009 fue contratado por Levis como Social Media Manager.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328407437787',
+							data-title="Juan Carlos Rentería")
+							div#main_content2
+								img(src='/images/juan-carlos.jpg')
+								div#contenido2
+									h3 Juan Carlos Rentería
+									p JUAN CARLOS RENTERIA GARCÍA es Ingeniero Industrial con Especialización en Mercadeo de la U. Javeriana y Maestría en Administración de Negocios.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328408767787',
+							data-title="Juan Camilo Suárez")
+							div#main_content2
+								img(src='/images/camilo-suarez.gif')
+								div#contenido2
+									h3 Juan Camilo Suárez
+									p Gerente y fundador de MarketView, empresa especializada en consultoría estratégica en Internet, Juan Camilo Suárez Mesa cuenta con más de 10 años.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328409907787',
+							data-title="Jorge Villegas")
+							div#main_content2
+								img(src='/images/rojo-villegas.gif')
+								div#contenido2
+									h3 Jorge Villegas
+									p Director de SMO en MarketView, empresa especializada en consultoría estratégica en Internet; desde hace 11 años está involucrado en el marketing digital, y desde hace dos años se desempeña como Director de Redes Sociales.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328411212787',
+							data-title="Christopher Hermes")
+							div#main_content2
+								img(src='/images/chris-big.png')
+								div#contenido2
+									h3 Christopher Hermes
+									p CEO/Director General. Grupo Ópalo – Empresa Holding de Agencias de Marketing Integrado y Producción Digital, México. Ejecutivo visionario de marketing, con historial de liderazgo.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328412722787',
+							data-title="Adriana Plata")
+							div#main_content2
+								img(src='/images/adriana-plata.gif')
+								div#contenido2
+									h3 Adriana Plata
+									p Directora de MEC:Interaction Colombia, unidad de planeación digital de MEC, una de las principales Agencia de Medios.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328413767787',
+							data-title="Mariano Otero")
+							div#main_content2
+								img(src='/images/mariano-otero.jpg')
+								div#contenido2
+									h3 Mariano Otero
+									p Argentino, Licenciado en Economía de la Universidad de Buenos Aires y posee una Maestría en Marketing y Comunicación de la Universidad de San Andrés.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328415647787',
+							data-title="Juan Luis Isaza")
+							div#main_content2
+								img(src='/images/juan-isaza.jpg')
+								div#contenido2
+									h3 Juan Luis Isaza
+									p Vicepresidente de Planeación Estratégica en la agencia de publicidad DDB en México, director del Social Media Lab para DDB Latina desde 2011.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328417032787',
+							data-title="Catherine Villota")
+							div#main_content2
+								img(src='/images/Catherine-Villota.jpg')
+								div#contenido2
+									h3 Catherine Villota
+									p Asesora de moda virtual, experta en moda, tendencias y estilo.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328418462787',
+							data-title="Susan Sardiñas")
+							div#main_content2
+								img(src='/images/ecoquizgransardinella.jpg')
+								div#contenido2
+									h3 Susan Sardiñas
+									p Diseñadora Industrial colombiana radicada en México, Ecofriendly blogger en Sardinellasardine.com, Fashionradicals.com y Tuhogar.com.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328418462787',
+							data-title="Sofía Calvo")
+							div#main_content2
+								img(src='/images/sofia-calvo.jpg')
+								div#contenido2
+									h3 Sofía Calvo
+									p Propietaria y editora jefe de Quinta Trends, importante y reconocido blog que busca acercarle a los fashionistas el mundo de diseñadores, marcas y tiendas de autor a través de entrevistas en profundidad.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328421337787',
+							data-title="Tuyo Isaza")
+							div#main_content2
+								img(src='/images/tuyo-isaza.jpg')
+								div#contenido2
+									h3 Tuyo Isaza
+									p Director estratégico en BRM con más de 15 años de experiencia en planeación digital, entusiasta de las nuevas tecnologías y de su impacto en la sociedad, la economía y en el mercadeo.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+						div.bloque(data-url="sistemaunoipad.com",
+							fbObject='10151328422092787',
+							data-title="Sergio Quijano")
+							div#main_content2
+								img(src='/images/sergio-quijano.gif')
+								div#contenido2
+									h3 Sergio Quijano
+									p Director general de medios de Publicaciones Semana, grupo líder en América Latina.
+									div#hour
+										span 2:00 - 4:00 pm
+									div#time
+										span Junio 21
+					div#barrita
+						div#info
+						div#controles
+			hr#dos
+			div#like
 				p 
-				p 
-				p
+				div#dedote
+					img(src='/stylesheets/img/like.png',alt='Like')				
 
-
-		div.bloque(data-url="destroyafteruse.com",
-			fbObject='objeto1',
-			data-info="Features: video adapted to several devices, semantic tags, flexible layouts, standards complaint. <a target='_blank' href='http://www.awwwards.com/best-websites/agent-strategic-intelligence-embassy'>Awwwards Mention, Sept 2010</a>")
-			img(src="http://html5lounge.com/imagenes/destroyafteruse.jpg", alt="Destroy After Use", width="1024", height="690")
-		div.bloque(data-url="sistemaunoipad.com",
-			fbObject='objeto2',
-			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
-			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
-		div.bloque(data-url="sistemaunoipad.com",
-			fbObject='objeto3',
-			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
-			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
-		div.bloque(data-url="sistemaunoipad.com",
-			fbObject='objeto4',
-			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
-			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
-		div.bloque(data-url="sistemaunoipad.com",
-			fbObject='objeto5',
-			data-info="Features:  iPad optimized and standard versions, touch gestures (swipe).")
-			img(src="http://html5lounge.com/imagenes/sistemaunoipad.jpg", alt="SistemaUno iPad", width="1024", height="690")
-
-
-	div#barrita
-		div#info
-		div#controles   
+	div#social
+		h3 Social Stream			
+		textarea(disabled="disabled") This is sparta!!
+		div#comentarios   
 

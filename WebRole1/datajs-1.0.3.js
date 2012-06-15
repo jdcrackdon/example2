@@ -13,10 +13,22 @@
 
 // datajs.js
 
-(function (window) {
 
-    //var DOMParser = require('xmldom').DOMParser;
-    var jsdom = require('jsdom');
+
+(function (window, undefined) {
+
+    //    global.window = require("jsdom")
+    //                .jsdom()
+    //                .createWindow();
+    //    global.jQuery = require("jquery");
+
+    //    global.XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    //    jQuery.support.cors = true;
+    //    jQuery.ajaxSettings.xhr = function () {
+    //        return new XMLHttpRequest;
+    //    }
+
+
 
 
     if (!window.datajs) {
@@ -29,7 +41,6 @@
 
     var datajs = window.datajs;
     var odata = window.OData;
-    var XMLHttpRequest = require("./XMLHttpRequest.js").XMLHttpRequest;
 
 
     // Provides an enumeration of possible kinds of payloads.
@@ -89,7 +100,7 @@
         }
 
         var args = Array.prototype.slice.call(arguments, 1);
-        setTimeout(function () {
+        window.setTimeout(function () {
             callback.apply(this, args);
         }, 0);
     };
@@ -888,8 +899,11 @@
     var createXmlHttpRequest = function () {
         /// <summary>Creates a XmlHttpRequest object.</summary>
         /// <returns type="XmlHttpRequest">XmlHttpRequest object.</returns>
-        if (XMLHttpRequest) {
-            return new XMLHttpRequest();
+        var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+        return new XMLHttpRequest;
+
+        if (window.XMLHttpRequest) {
+            return new window.XMLHttpRequest();
         }
         var exception;
         if (window.ActiveXObject) {
@@ -1430,7 +1444,38 @@
     var createDomParser = function () {
         /// <summary>Creates a DOM parser object.</summary>
         /// <returns type="DOMParser">DOMParser object.</returns>
+        var exception;
+        var result;
+        var DOMParser = require('xmldom').DOMParser;
+        return new DOMParser();
+        if (window.ActiveXObject) {
+            try {
+                result = new ActiveXObject("Msxml2.DOMDocument.6.0");
+                result.async = false;
 
+                return result;
+            } catch (_) {
+                try {
+                    result = new ActiveXObject("Msxml2.DOMDocument.3.0");
+
+                    result.async = false;
+                    safeSetProperty(result, "ProhibitDTD", true);
+                    safeSetProperty(result, "MaxElementDepth", 256);
+                    safeSetProperty(result, "AllowDocumentFunction", false);
+                    safeSetProperty(result, "AllowXsltScript", false);
+
+                    return result;
+                } catch (e) {
+                    exception = e;
+                }
+            }
+        } else {
+            if (window.DOMParser) {
+                return new window.DOMParser();
+            }
+            exception = { message: "XML DOM parser not supported" };
+        }
+        throw exception;
     };
 
     var createAttributeExtension = function (wrappedNode) {
@@ -1771,17 +1816,21 @@
         /// <param name="nsURI" type="String">Namespace of the root element.</param>
         /// <returns>The wrapped root element of the document.</returns>
 
-        var dom;
+        var DOMImplementation = require('xmldom/dom').DOMImplementation;
+        var dom = createDomParser();
+        dom = new DOMImplementation().createDocument(nsURI, name, null);
 
-        // if (window.ActiveXObject) {
-        dom = createDomParser();
-        dom.documentElement = dom.createNode(1, name, nsURI);
-        //}
-        //else if (window.document.implementation && window.document.implementation.createDocument) {
-        //    dom = window.document.implementation.createDocument(nsURI, name, null);
-        //}
 
-        return xml_wrapNode(dom.documentElement);
+        //        if (window.ActiveXObject) {
+        //            dom = createDomParser();
+        //            dom.documentElement = dom.createNode(1, name, nsURI);
+        //        }
+        //        else if (window.document.implementation && window.document.implementation.createDocument) {
+        //            dom = window.document.implementation.createDocument(nsURI, name, null);
+        //        }
+
+        return  xml_wrapNode(dom.documentElement);
+        
     };
 
     var xmlNewDomAttribute = function (domNode, localName, nsURI, nsPrefix) {
@@ -1836,7 +1885,6 @@
         /// <returns>The created wrapped element.</returns>
 
         var dom = parent.domNode.ownerDocument;
-
         var element;
         if (dom.createElementNS) {
             element = dom.createElementNS(nsURI, name);
@@ -1846,6 +1894,7 @@
 
         if (value) {
             xmlAppendPreserving(element, value);
+
         }
 
         parent.domNode.appendChild(element);
@@ -1927,7 +1976,6 @@
         for (i = 0; i < len; i++) {
             fragment.appendChild(children[i].cloneNode(true));
         }
-
         return xmlSerializeNode(fragment);
     };
 
@@ -1940,6 +1988,11 @@
         if (xml !== undefined) {
             return xml;
         }
+
+        var XMLSerializer = require('xmldom').XMLSerializer;
+
+        return new XMLSerializer().serializeToString(domNode);
+
 
         if (window.XMLSerializer) {
             var serializer = new window.XMLSerializer();
@@ -1982,18 +2035,16 @@
         /// <param name="text" type="String">Document text.</param>
         /// <returns>The root element of the document.</returns>
 
-        //var dom = DOMParser
-        //if (dom.parseFromString) {
-        //var dom = new DOMParser().parseFromString(text, "text/xml");
-        var dom = jsdom.jsdom(text, jsdom.level(1, "core"), null);
-        console.log(dom);
-        checkParserErrorElement(dom.documentElement, text);
-        //        } else {
-        //            dom.loadXML(text);
-        //            if (dom.parseError.errorCode !== 0) {
-        //                throw { message: dom.parseError.reason, errorXmlText: text, srcText: dom.parseError.srcText };
-        //            }
-        //        }
+        var dom = createDomParser();
+        if (dom.parseFromString) {
+            dom = dom.parseFromString(text, "text/xml");
+            checkParserErrorElement(dom.documentElement, text);
+        } else {
+            dom.loadXML(text);
+            if (dom.parseError.errorCode !== 0) {
+                throw { message: dom.parseError.reason, errorXmlText: text, srcText: dom.parseError.srcText };
+            }
+        }
 
         return dom.documentElement;
     };
@@ -2132,6 +2183,7 @@
 
         var cType = context.contentType = context.contentType || contentType(xmlMediaType);
         var result = undefined;
+
         if (cType && cType.mediaType === xmlMediaType) {
             var xmlDoc = writeODataXmlDocument(data);
             if (xmlDoc) {
@@ -3361,13 +3413,16 @@
 
         var docRoot;
         var type = payloadTypeOf(data);
+
         switch (type) {
             case PAYLOADTYPE_FEEDORLINKS:
+
                 docRoot = writeAtomFeed(null, data, context);
                 break;
             case PAYLOADTYPE_ENTRY:
                 // FALLTHROUGH
             case PAYLOADTYPE_COMPLEXTYPE:
+
                 docRoot = writeAtomEntry(null, data, context);
                 break;
         }
@@ -4636,7 +4691,7 @@
         /// <param name="handlerMethod" type="String">Name of handler method to invoke.</param>
         /// <param name="requestOrResponse" type="Object">request/response argument for delegated call.</param>
         /// <param name="context" type="Object">context argument for delegated call.</param>
-        
+
         var i, len;
         for (i = 0, len = handlers.length; i < len && !handlers[i][handlerMethod](requestOrResponse, context); i++) {
         }
@@ -4660,7 +4715,7 @@
             /// <summary>Reads the body of the specified response by delegating to JSON and ATOM handlers.</summary>
             /// <param name="response">Response object.</param>
             /// <param name="context">Operation context.</param>
-            console.log(response);
+
             if (response && assigned(response.body) && response.headers["Content-Type"]) {
                 dispatchHandler("read", response, context);
             }

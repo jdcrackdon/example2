@@ -1,63 +1,91 @@
-init
-init
-objeto1
-objeto2
-objeto3
-objeto2
-objeto1
-undefined
-objeto5
-objeto4
-objeto3
-objeto2
-objeto1
-undefined
-objeto5
-objeto4
-objeto3
-objeto4
-objeto5
-undefined
-objeto1
-objeto2
-objeto1
-undefined
-objeto5
-undefined
-objeto1
-objeto2
-objeto3
-objeto4
-objeto5
-undefined
-objeto1
-undefined
-objeto1
-undefined
-objeto1
-objeto2
-objeto3
-objeto4
-init
-objeto1
-undefined
-objeto5
-undefined
-objeto5
-objeto4
-objeto3
-objeto2
-objeto3
-objeto4
-objeto5
-undefined
-objeto1
-objeto2
-objeto3
-objeto2
-objeto1
-undefined
-objeto5
-objeto4
-objeto3
-objeto2
+warn: client not handshaken client should reconnect
+FacebookUsers?$filter=Uid%20eq%20'a'
+[ { __metadata: 
+     { id: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       uri: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       etag: 'W/"\'1020450660\',\'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD\',\'1419031955\',\'user_photos%2Cuser_about_me%2Cpublish_stream%2Coffline_access%2Cmanage_pages%2Cexport_stream%2Cemail\',\'jouseca01%40hotmail.com\',\'a\'"',
+       type: 'LightSwitchApplication.FacebookUser' },
+    FanPages: { __deferred: [Object] },
+    Id: '5bb0a110-9705-012f-6709-1231392760bc',
+    Identification: '1020450660',
+    Token: 'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD',
+    FacebookId: '1419031955',
+    Permissions: 'user_photos,user_about_me,publish_stream,offline_access,manage_pages,export_stream,email',
+    Email: 'jouseca01@hotmail.com',
+    Uid: 'a' } ]
+user AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD
+{ message: '(#100) The parameter url is required',
+  type: 'OAuthException',
+  code: 100 }
+FacebookUsers?$filter=Uid%20eq%20'a'
+[ { __metadata: 
+     { id: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       uri: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       etag: 'W/"\'1020450660\',\'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD\',\'1419031955\',\'user_photos%2Cuser_about_me%2Cpublish_stream%2Coffline_access%2Cmanage_pages%2Cexport_stream%2Cemail\',\'jouseca01%40hotmail.com\',\'a\'"',
+       type: 'LightSwitchApplication.FacebookUser' },
+    FanPages: { __deferred: [Object] },
+    Id: '5bb0a110-9705-012f-6709-1231392760bc',
+    Identification: '1020450660',
+    Token: 'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD',
+    FacebookId: '1419031955',
+    Permissions: 'user_photos,user_about_me,publish_stream,offline_access,manage_pages,export_stream,email',
+    Email: 'jouseca01@hotmail.com',
+    Uid: 'a' } ]
+user AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD
+{ message: '(#100) The parameter url is required',
+  type: 'OAuthException',
+  code: 100 }
+10151328422092787
+Sergio Quijano
+10151328404122787
+Daniel Arbeláez
+10151328405997787
+Gareth Hornberger
+10151328404122787
+Daniel Arbeláez
+10151328422092787
+Sergio Quijano
+10151328421337787
+Tuyo Isaza
+10151328422092787
+Sergio Quijano
+10151328404122787
+Daniel Arbeláez
+10151328405997787
+Gareth Hornberger
+10151328404122787
+Daniel Arbeláez
+10151328405997787
+Gareth Hornberger
+10151328407437787
+Juan Carlos Rentería
+10151328405997787
+Gareth Hornberger
+10151328404122787
+Daniel Arbeláez
+10151328405997787
+Gareth Hornberger
+10151328407437787
+Juan Carlos Rentería
+10151328408767787
+Juan Camilo Suárez
+10151328407437787
+Juan Carlos Rentería
+10151328405997787
+Gareth Hornberger
+10151328404122787
+Daniel Arbeláez
+10151328422092787
+Sergio Quijano
+10151328421337787
+Tuyo Isaza
+10151328422092787
+Sergio Quijano
+10151328404122787
+Daniel Arbeláez
+10151328405997787
+Gareth Hornberger
+10151328405997787
+Gareth Hornberger
+10151328404122787
+Daniel Arbeláez

@@ -1,0 +1,50 @@
+.vertical-carousel {
+background-color: #EEE;
+padding: 10px;
+width:200px;
+}
+
+.vertical-carousel a {
+display: block;
+padding: 5px;
+background-color: #AAA;
+font-family: 'YanoneKaffeesatzBoldRegular';
+text-align: center;
+font-size:30px;
+color: #333;
+text-decoration: none;
+}
+
+.vertical-carousel ul.vertical-carousel-list {
+position: relative;
+margin: 0 auto;
+top: 0px;
+padding:0px;
+}
+
+.vertical-carousel ul.vertical-carousel-list li {
+list-style: none;
+//margin: 0px;padding:0px;
+color: #333;
+display: block;
+padding: 5px;
+//margin-bottom: 5px;
+text-align: center;
+//background-color: #ddd;
+width:191px;
+height:120px;
+background-color:#E3E3E3;
+border: 1pt solid white;
+//float:left;
+position:relative;
+margin-top:13px;
+}
+
+.vertical-carousel ul.vertical-carousel-list li p{
+	position:relative;
+	font-family: 'YanoneKaffeesatzBoldRegular';
+	font-size:22px;
+	color:#888;
+	text-align:center;
+	top:90px;
+	}

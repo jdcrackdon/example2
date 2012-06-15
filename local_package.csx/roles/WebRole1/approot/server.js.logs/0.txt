@@ -1,0 +1,151 @@
+warn: client not handshaken client should reconnect
+10151328404122787
+Daniel Arbeláez
+FacebookUsers?$filter=Uid%20eq%20'a'
+[ { __metadata: 
+     { id: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       uri: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       etag: 'W/"\'1020450660\',\'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD\',\'1419031955\',\'user_photos%2Cuser_about_me%2Cpublish_stream%2Coffline_access%2Cmanage_pages%2Cexport_stream%2Cemail\',\'jouseca01%40hotmail.com\',\'a\'"',
+       type: 'LightSwitchApplication.FacebookUser' },
+    FanPages: { __deferred: [Object] },
+    Id: '5bb0a110-9705-012f-6709-1231392760bc',
+    Identification: '1020450660',
+    Token: 'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD',
+    FacebookId: '1419031955',
+    Permissions: 'user_photos,user_about_me,publish_stream,offline_access,manage_pages,export_stream,email',
+    Email: 'jouseca01@hotmail.com',
+    Uid: 'a' } ]
+user AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD
+[ { post_id: '1419031955_4177740047990',
+    actor_id: 1419031955,
+    target_id: null,
+    app_id: 419704494719974,
+    message: 'TEST I like Daniel Arbeláez' } ]
+10151328405997787
+Gareth Hornberger
+FacebookUsers?$filter=Uid%20eq%20'a'
+[ { __metadata: 
+     { id: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       uri: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       etag: 'W/"\'1020450660\',\'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD\',\'1419031955\',\'user_photos%2Cuser_about_me%2Cpublish_stream%2Coffline_access%2Cmanage_pages%2Cexport_stream%2Cemail\',\'jouseca01%40hotmail.com\',\'a\'"',
+       type: 'LightSwitchApplication.FacebookUser' },
+    FanPages: { __deferred: [Object] },
+    Id: '5bb0a110-9705-012f-6709-1231392760bc',
+    Identification: '1020450660',
+    Token: 'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD',
+    FacebookId: '1419031955',
+    Permissions: 'user_photos,user_about_me,publish_stream,offline_access,manage_pages,export_stream,email',
+    Email: 'jouseca01@hotmail.com',
+    Uid: 'a' } ]
+user AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD
+[ { post_id: '1419031955_4177741968038',
+    actor_id: 1419031955,
+    target_id: null,
+    app_id: 419704494719974,
+    message: 'TEST I like Gareth Hornberger' } ]
+10151328407437787
+Juan Carlos Rentería
+FacebookUsers?$filter=Uid%20eq%20'a'
+[ { __metadata: 
+     { id: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       uri: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       etag: 'W/"\'1020450660\',\'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD\',\'1419031955\',\'user_photos%2Cuser_about_me%2Cpublish_stream%2Coffline_access%2Cmanage_pages%2Cexport_stream%2Cemail\',\'jouseca01%40hotmail.com\',\'a\'"',
+       type: 'LightSwitchApplication.FacebookUser' },
+    FanPages: { __deferred: [Object] },
+    Id: '5bb0a110-9705-012f-6709-1231392760bc',
+    Identification: '1020450660',
+    Token: 'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD',
+    FacebookId: '1419031955',
+    Permissions: 'user_photos,user_about_me,publish_stream,offline_access,manage_pages,export_stream,email',
+    Email: 'jouseca01@hotmail.com',
+    Uid: 'a' } ]
+user AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD
+[ { post_id: '1419031955_4177743528077',
+    actor_id: 1419031955,
+    target_id: null,
+    app_id: 419704494719974,
+    message: 'TEST I like Juan Carlos Rentería' } ]
+10151328422092787
+Sergio Quijano
+10151328421337787
+Tuyo Isaza
+10151328418462787
+Sofía Calvo
+10151328421337787
+Tuyo Isaza
+FacebookUsers?$filter=Uid%20eq%20'a'
+[ { __metadata: 
+     { id: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       uri: 'http://dev.idlinksolutions.com/clicktoaction/clicktoactionData.svc/FacebookUsers(guid\'5bb0a110-9705-012f-6709-1231392760bc\')',
+       etag: 'W/"\'1020450660\',\'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD\',\'1419031955\',\'user_photos%2Cuser_about_me%2Cpublish_stream%2Coffline_access%2Cmanage_pages%2Cexport_stream%2Cemail\',\'jouseca01%40hotmail.com\',\'a\'"',
+       type: 'LightSwitchApplication.FacebookUser' },
+    FanPages: { __deferred: [Object] },
+    Id: '5bb0a110-9705-012f-6709-1231392760bc',
+    Identification: '1020450660',
+    Token: 'AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD',
+    FacebookId: '1419031955',
+    Permissions: 'user_photos,user_about_me,publish_stream,offline_access,manage_pages,export_stream,email',
+    Email: 'jouseca01@hotmail.com',
+    Uid: 'a' } ]
+user AAAF9uBFRgZBYBAEaXGTbf9dMtUwITzq8jTezDZBoNYtuE9eXfrZAeDLRQETLsrm3TCMQ6ZBgg5RhZAIF2ZAgZBsZAl3JqDSIbCGHAYZC5NOi8kAZDZD
+[ { post_id: '1419031955_4177753848335',
+    actor_id: 1419031955,
+    target_id: null,
+    app_id: 419704494719974,
+    message: 'TEST I like Tuyo Isaza' } ]
+10151328404122787
+Daniel Arbeláez
+undefined
+undefined
+10151328422092787
+Sergio Quijano
+10151328421337787
+Tuyo Isaza
+10151328418462787
+Sofía Calvo
+10151328405997787
+Gareth Hornberger
+10151328407437787
+Juan Carlos Rentería
+10151328408767787
+Juan Camilo Suárez
+10151328409907787
+Jorge Villegas
+10151328408767787
+Juan Camilo Suárez
+[TypeError: Cannot read property 'protocol' of null]
+TypeError: Cannot read property 'protocol' of null
+    at Object.request (https.js:71:14)
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:236:25
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:263:7
+    at ServiceBusService.filter (C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:530:7)
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:260:10
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\servicebusserviceclient.js:126:5
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\serviceBus\wrap.js:67:5
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\serviceBus\wraptokenmanager.js:77:5
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\serviceBus\wrapservice.js:105:7
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:534:11
+[TypeError: Cannot read property 'protocol' of null]
+TypeError: Cannot read property 'protocol' of null
+    at Object.request (https.js:71:14)
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:236:25
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:263:7
+    at ServiceBusService.filter (C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:530:7)
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:260:10
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\servicebusserviceclient.js:126:5
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\serviceBus\wrap.js:67:5
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\serviceBus\wraptokenmanager.js:77:5
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\serviceBus\wrapservice.js:105:7
+    at C:\azure_node_example\example2\WebRole1\node_modules\azure\lib\services\core\serviceclient.js:534:11
+10151328404122787
+Daniel Arbeláez
+10151328405997787
+Gareth Hornberger
+10151328407437787
+Juan Carlos Rentería
+10151328408767787
+Juan Camilo Suárez
+10151328409907787
+Jorge Villegas
+10151328404122787
+Daniel Arbeláez

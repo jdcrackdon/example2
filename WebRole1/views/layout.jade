@@ -1,6 +1,15 @@
 !!!
-html
+html(xmlns:fb="http://ogp.me/ns/fb#")
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/carousel.css')
+    link(rel='stylesheet', href='/stylesheets/chosen.css')
+    script(src='/nowjs/now.js')
+    script(src='http://code.jquery.com/jquery-1.7.2.min.js')
+    script(src='/javascripts/script.js')
+    script(src='/javascripts/jquery.verticalcarousel.js')
+    script(src='/javascripts/chosen/chosen.jquery.min.js')
+  div#header
   body!= body
+  div#footer

@@ -37,6 +37,8 @@
 		barrita   = $('#barrita');
 		controles = $('#controles');
 		bloques   = $('.bloque');
+		maintitle = $('div#main h2#titulo');
+		maindescr = $('div#main p#des');
 		
 		$(window).resize(checkSize);
 		checkSize();
@@ -63,7 +65,7 @@
 			}
 		});
 		
-		animacion_inicio();
+		//animacion_inicio();
 		
 /*		$("h1").click(function(){
 			animacion_inicio();
@@ -82,9 +84,6 @@
 		if(actual == -1) actual = bloques.size()-1;
 		
 		common(DIRECCION_RIGHT);
-
-		now.fbObject =item_actual.attr('fbObject');
-		now.checkValue();
 	}
 	
 	// next section
@@ -96,9 +95,6 @@
 		if(actual == bloques.size()) actual = 0;
 	
 		common(DIRECCION_LEFT);
-
-		now.fbObject=item_actual.attr('fbObject');
-		now.checkValue();
 	}
 	
 	// show/hide div#barrita depengin on its current state
@@ -173,6 +169,8 @@
 			// <h2>link</h2><p>description</p>
 			info.html('<h2><a href="http://'+item_actual.attr('data-url')+'" target="_blank">'+
 				item_actual.attr('data-url')+'</a></h2>'+'<p>'+item_actual.attr('data-info')+'</p>');
+			maintitle.html(item_actual.attr('data-title'));
+			maindescr.html(item_actual.attr('data-info'));
 		}
 		
 		// show div#barrita on startup and first section (not home)
@@ -203,6 +201,10 @@
 				toggle_barrita();
 			}
 		}
+
+		now.fbObject=item_actual.attr('fbObject');
+		now.speaker =item_actual.attr('data-title'); 
+		now.checkValue();
 	}
 	
 	// input
@@ -237,6 +239,13 @@
 			
 			// leer el indice guardado en data-indice
 			actual = parseInt(target.attr('data-indice'));	
+	
+			// do the switch
+			common(actual > anterior ? DIRECCION_LEFT : DIRECCION_RIGHT);
+		});
+		
+		$(".vertical-carousel-list li").click(function (e) {
+			actual = parseInt($(this).attr("data_index"));	
 	
 			// do the switch
 			common(actual > anterior ? DIRECCION_LEFT : DIRECCION_RIGHT);
@@ -369,7 +378,7 @@
 		
 		// centrar y poner outline
 		if(wHeight > 672)
-			pagina.css({/*'outline':'1px solid #840a19',*/ 'margin-top': ((wHeight-690)/2)+'px'});
+			pagina.css({/*'outline':'1px solid #840a19',*/ });
 		else 
 			pagina.css({'margin-top': 0});
 		
@@ -380,7 +389,7 @@
 			HEIGHT = 483;
 			BARRITA_OFFSET = 380;
 			CANVAS_SIZE = 308;
-			pagina.css({'margin-top': ((wHeight-HEIGHT)/2)+'px'});
+			pagina.css({});
 		} else {
 			$('body').removeClass('reduced');
 			
