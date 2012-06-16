@@ -5,18 +5,16 @@ script
 		$("#vc1").verticalCarousel({nSlots: 5});		
 		$(".chzn-select").chosen();
 		$("#dedote").hide();
-		//buildStream();
-
-		/*if (window.webkitNotifications) {
-			if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
-				// function defined in step 2
-				window.webkitNotifications.createNotification('holalalalalal');
-			} else {
-				window.webkitNotifications.requestPermission();
-			}
-		}else {
-			console.log("Notifications are not supported for this Browser/OS version yet.");
-		}*/
+		function hasGetUserMedia() {
+		// Note: Opera builds are unprefixed.
+			return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+			navigator.mozGetUserMedia || navigator.msGetUserMedia);
+		}
+		if (hasGetUserMedia()) {
+			// Good to go!
+		} else {
+			alert('getUserMedia() is not supported in your browser');
+		}
 	});
 
 	now.ready(function() {
@@ -114,31 +112,61 @@ div#content
 			a.scrd Abajo
 
 	div#main
-		h2#titulo loololokoasfhsdifhisdhf  
+
+		video(autoplay)
+		img(src="")
+		canvas(style="display:none;")
+
+		script
+			var onFailSoHard = function(e) {
+				console.log('Reeeejected!', e);
+			};
+
+			var video = document.querySelector('video');
+			var canvas = document.querySelector('canvas');
+			var ctx = canvas.getContext('2d');
+			var localMediaStream = null;
+
+			function snapshot() {
+			if (localMediaStream) {
+				ctx.drawImage(video, 0, 0);
+				// "image/webp" works in Chrome 18. In other browsers, this will fall back to image/png.
+				document.querySelector('img').src = canvas.toDataURL('image/webp');
+				}
+			}
+
+			video.addEventListener('click', snapshot, false);
+
+			// Not showing vendor prefixes or code that works cross-browser.
+			navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
+			if (navigator.getUserMedia) {
+				navigator.getUserMedia({audio: true, video: true}, function(stream) {
+					if (navigator.webkitGetUserMedia) {
+						video.src = window.URL.createObjectURL(stream);
+						localMediaStream = stream;
+					} else {
+						video.src = window.URL.createObjectURL(stream);
+						localMediaStream = stream;
+					}
+				}, onFailSoHard);
+			}
+
+
+		h2#titulo Click to Action Speakers
 		hr
-		p#des skhdfsdhfihsdiufhisdhfiushdih
+		p#des
 		div#main_content
 			div#contenido
 				div#pagina.disable
 					
 					div#bloques
 
-						div#home.bloque
-							img(src="http://html5lounge.com/imagenes/home.png", alt="circle")
-
-							div#col
-								canvas(width="440",height="440")
-								h1 hola
-
-							div#col
-								p 
-								p 
-								p
-
+						div.bloque(data-title="Click to Action Speakers")
+							img(src='/images/banner_click_to_action.jpg',style='width:988px;height:385px;')
 
 						div.bloque(data-url="destroyafteruse.com",
-							fbObject='10151328404122787',
-							data-info="",
+							fbObject='10151328404122787'
 							data-title="Daniel Arbeláez")
 							div#main_content2
 								img(src='/images/daniel-arbelaez.png')
@@ -305,6 +333,9 @@ div#content
 										span 2:00 - 4:00 pm
 									div#time
 										span Junio 21
+						div.bloque(data-title="Click to Action Speakers")
+							img(src='/images/banner_click_to_action.jpg',style='width:988px;height:385px;')
+
 					div#barrita
 						div#info
 						div#controles

@@ -65,7 +65,7 @@
 			}
 		});
 		
-		animacion_inicio();
+		//animacion_inicio();
 		
 /*		$("h1").click(function(){
 			animacion_inicio();

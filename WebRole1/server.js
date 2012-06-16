@@ -10,10 +10,12 @@ var express = require('express')
   , OData = require('./datajs-1.0.3.js').OData
   , FB = require('fb')
   , moment = require('moment')
+  , fs = require('fs')
   , request = require('request');
 
     var objFb='',
-      speak='';
+        speak='',
+        photoFB='';
 
 //Create the service Bus
 var serviceBusService = azure.createServiceBusService();
@@ -78,7 +80,9 @@ function receiveSubscriptionMessage () {
   everyone.now.checkValue = function() {
     objFb=this.now.fbObject;
     speak=this.now.speaker;
+    photoFB = this.now.capture;
     console.log(objFb);
+    //console.log(photoFB);
     console.log(speak); 
   };
 
@@ -139,6 +143,20 @@ function facebookInteraction(token) {
       });
     }
   }); 
+}
+
+function postPhotoAlbum (argument) {
+    FB.setAccessToken(token);
+    FB.api('/album_id/photos', 'post', {
+        message:'photo description',
+        url:imgURL        
+    }, function(response){
+        if (!response || response.error) {
+            alert('Error occured');
+        } else {
+            alert('Post ID: ' + response.id);
+        }
+    });
 }
 
 function dataUser(token) {

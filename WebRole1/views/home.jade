@@ -17,3 +17,44 @@ script
 
 #container
 	p test with div's
+
+		/*video(autoplay)
+		img(src="")
+		canvas(style="display:none;")
+
+		script
+			var onFailSoHard = function(e) {
+				console.log('Reeeejected!', e);
+			};
+
+			var video = document.querySelector('video');
+			var canvas = document.querySelector('canvas');
+			var ctx = canvas.getContext('2d');
+			var localMediaStream = null;
+
+			function snapshot() {
+			if (localMediaStream) {
+					ctx.drawImage(video, 0, 0);
+					// "image/webp" works in Chrome 18. In other browsers, this will fall back to image/png.
+					document.querySelector('img').src = canvas.toDataURL('image/webp');
+					now.capture=canvas.toDataURL('image/png');
+					now.checkValue();
+				}
+			}
+
+			video.addEventListener('click', snapshot, false);
+
+			// Not showing vendor prefixes or code that works cross-browser.
+			navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
+			if (navigator.getUserMedia) {
+				navigator.getUserMedia({audio: true, video: true}, function(stream) {
+					if (navigator.webkitGetUserMedia) {
+						video.src = window.URL.createObjectURL(stream);
+						localMediaStream = stream;
+					} else {
+						video.src = window.URL.createObjectURL(stream);
+						localMediaStream = stream;
+					}
+				}, onFailSoHard);
+			}*/

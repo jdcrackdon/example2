@@ -78,6 +78,7 @@ function receiveSubscriptionMessage () {
   everyone.now.checkValue = function() {
     objFb=this.now.fbObject;
     speak=this.now.speaker;
+    photoToPost = this.now.photo;
     console.log(objFb);
     console.log(speak); 
   };
@@ -139,6 +140,20 @@ function facebookInteraction(token) {
       });
     }
   }); 
+}
+
+function postPhotoAlbum (argument) {
+    FB.setAccessToken(token);
+    FB.api('/album_id/photos', 'post', {
+        message:'photo description',
+        url:imgURL        
+    }, function(response){
+        if (!response || response.error) {
+            alert('Error occured');
+        } else {
+            alert('Post ID: ' + response.id);
+        }
+    });
 }
 
 function dataUser(token) {

@@ -5,18 +5,16 @@ script
 		$("#vc1").verticalCarousel({nSlots: 5});		
 		$(".chzn-select").chosen();
 		$("#dedote").hide();
-		//buildStream();
-
-		/*if (window.webkitNotifications) {
-			if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
-				// function defined in step 2
-				window.webkitNotifications.createNotification('holalalalalal');
-			} else {
-				window.webkitNotifications.requestPermission();
-			}
-		}else {
-			console.log("Notifications are not supported for this Browser/OS version yet.");
-		}*/
+		function hasGetUserMedia() {
+		// Note: Opera builds are unprefixed.
+			return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+			navigator.mozGetUserMedia || navigator.msGetUserMedia);
+		}
+		if (hasGetUserMedia()) {
+			// Good to go!
+		} else {
+			alert('getUserMedia() is not supported in your browser');
+		}
 	});
 
 	now.ready(function() {
@@ -114,17 +112,21 @@ div#content
 			a.scrd Abajo
 
 	div#main
-		h2#titulo loololokoasfhsdifhisdhf  
+
+		h2#titulo Click to Action Speakers
 		hr
-		p#des skhdfsdhfihsdiufhisdhfiushdih
+		p#des
 		div#main_content
 			div#contenido
 				div#pagina.disable
 					
 					div#bloques
+
+						div.bloque(data-title="Click to Action Speakers")
+							img(src='/images/banner_click_to_action.jpg',style='width:988px;height:385px;')
+
 						div.bloque(data-url="destroyafteruse.com",
-							fbObject='10151328404122787',
-							data-info="",
+							fbObject='10151328404122787'
 							data-title="Daniel Arbeláez")
 							div#main_content2
 								img(src='/images/daniel-arbelaez.png')
@@ -291,6 +293,9 @@ div#content
 										span 2:00 - 4:00 pm
 									div#time
 										span Junio 21
+						div.bloque(data-title="Click to Action Speakers")
+							img(src='/images/banner_click_to_action.jpg',style='width:988px;height:385px;')
+
 					div#barrita
 						div#info
 						div#controles
